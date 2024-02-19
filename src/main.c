@@ -226,7 +226,7 @@ static void UpdateDrawFrame(void)
                 UpdateLogoScreen();
 
                 if (FinishLogoScreen()) TransitionToScreen(TITLE);
-
+                else if (IsKeyPressed(KEY_SPACE)) TransitionToScreen(TITLE);
             } break;
             case TITLE:
             {
@@ -234,7 +234,6 @@ static void UpdateDrawFrame(void)
 
                 if (FinishTitleScreen() == 1) TransitionToScreen(OPTIONS);
                 else if (FinishTitleScreen() == 2) TransitionToScreen(GAMEPLAY);
-
             } break;
             case OPTIONS:
             {

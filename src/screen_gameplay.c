@@ -31,7 +31,10 @@
 //----------------------------------------------------------------------------------
 static int framesCounter = 0;
 static int finishScreen = 0;
-
+Vector2 playerPos = {0,0};
+Vector2 playerVel = {0,0};
+float incSpeed = 0.1f;
+float velocityCap = 3.0f;
 //----------------------------------------------------------------------------------
 // Gameplay Screen Functions Definition
 //----------------------------------------------------------------------------------
@@ -48,13 +51,36 @@ void InitGameplayScreen(void)
 void UpdateGameplayScreen(void)
 {
     // TODO: Update GAMEPLAY screen variables here!
+    // Player movement
+    if(IsKeyDown(KEY_D)){
+      playerVel.x -= incSpeed;
+      playerPos.x -= playerVel.x;
+    }
+    if(IsKeyDown(KEY_A)){
+      playerVel.x += incSpeed;
+      playerPos.x -= playerVel.x;
+    }
+    if(IsKeyDown(KEY_S)){
+      playerVel.y += incSpeed;
+      playerPos.y += playerVel.y;
+    }
+    if(IsKeyDown(KEY_W)){
+      playerVel.y -= incSpeed;
+      playerPos.y += playerVel.y;
+    }
+    if(playerVel.x >= velocityCap){
+      playerVel.x = velocityCap;
+    }
+    if(playerVel.y >= velocityCap){
+      playerVel.y = velocityCap;
+    }
 }
 
 // Gameplay Screen Draw logic
 void DrawGameplayScreen(void)
 {
     // TODO: Draw GAMEPLAY screen here!
-    
+    DrawRectangleV(playerPos, (Vector2){32,64}, RED);
 }
 
 // Gameplay Screen Unload logic
